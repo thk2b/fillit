@@ -2,6 +2,9 @@ NAME = fillit
 LIBFT = libft/libft.a
 
 SRC =\
+	pieces.c\
+	grid.c\
+	fillit.c\
 	main.c\
 
 OBJ = $(SRC:.c=.o)
