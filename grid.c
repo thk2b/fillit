@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 16:33:20 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/11 22:16:50 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/11 23:55:37 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,6 @@ void	write_grid(t_grid *grid)
 	while (y < grid->size)
 	{
 		write(1, grid->data[y++], grid->size);
-		write(1,"\n", 1);
+		write(1, "\n", 1);
 	}
 }

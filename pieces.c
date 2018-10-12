@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 16:17:38 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/11 22:57:05 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/11 23:56:51 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static int	read_piece(int fd, t_llist **list)
 {
 	size_t		i;
 	size_t		len;
-	char	*line;
-	t_grid	*piece;
+	char		*line;
+	t_grid		*piece;
 
 	i = 0;
 	MALLOC_CHECK(piece = grid_new(4));
@@ -51,10 +51,10 @@ int			read_pieces(int fd, t_llist **pieces)
 	while ((status = read_piece(fd, pieces)))
 	{
 		if (get_next_line(fd, &line) < 1)
-			break;
+			break ;
 		free(line);
 	}
-	if (status == -1) //TODO: free
+	if (status == -1)
 		return (-1);
 	return (1);
 }

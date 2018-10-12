@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 19:58:39 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/11 20:42:10 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/11 23:57:12 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void				llist_push(t_llist **head, void *data)
 		return ((void)NULL);
 	if (*head == NULL)
 	{
-		if((*head = llist_new_head()) == NULL)
+		if ((*head = llist_new_head()) == NULL)
 			return ((void)NULL);
 		(*head)->start = n;
 	}

@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 16:16:27 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/11 22:32:02 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/11 23:57:20 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ static void	remove(t_grid *grid, t_grid *piece, int x, int y)
 
 static int	fillit(t_grid *grid, t_llist_node *piece_lst)
 {
-	size_t x;
-	size_t y;
+	size_t	x;
+	size_t	y;
 	t_grid	*piece;
 
 	if (piece_lst == NULL)

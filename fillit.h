@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 15:55:19 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/11 22:57:20 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/11 23:55:59 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ typedef struct	s_grid
 	char	c;
 }				t_grid;
 
-t_grid	*grid_new(size_t size);
-void	grid_free(t_grid *grid);
-int		read_pieces(int fd, t_llist **pieces);
-int		standardize_piece(t_grid *piece);
-t_grid	*fill_smallest_grid(t_llist *pieces);
-void	write_grid(t_grid *grid);
+t_grid			*grid_new(size_t size);
+void			grid_free(t_grid *grid);
+int				read_pieces(int fd, t_llist **pieces);
+int				standardize_piece(t_grid *piece);
+t_grid			*fill_smallest_grid(t_llist *pieces);
+void			write_grid(t_grid *grid);
 
 #endif

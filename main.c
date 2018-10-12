@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 16:02:44 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/11 21:21:23 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/11 23:55:20 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		main(int ac, char **av)
 		return (usage());
 	if ((fd = open(av[1], O_RDONLY)) == -1)
 		return (error());
-	if((read_pieces(fd, &pieces)) == -1)
+	if ((read_pieces(fd, &pieces)) == -1)
 		return (error());
 	MALLOC_CHECK(grid = fill_smallest_grid(pieces));
 	write_grid(grid);
