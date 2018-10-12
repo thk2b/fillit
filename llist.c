@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 19:58:39 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/11 23:57:12 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/12 00:46:40 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static t_llist_node	*llist_new_node(void *data)
 	LLIST_MALLOC_CHECK(n = (t_llist_node*)malloc(sizeof(t_llist_node)));
 	n->data = data;
 	n->next = NULL;
+	n->is_available = 1;
+	n->index = -1;
 	return (n);
 }
 
@@ -45,9 +47,13 @@ void				llist_push(t_llist **head, void *data)
 		if ((*head = llist_new_head()) == NULL)
 			return ((void)NULL);
 		(*head)->start = n;
+		n->index = 0;
 	}
 	else
+	{
+		n->index = (*head)->last->index + 1;
 		(*head)->last->next = n;
+	}
 	(*head)->last = n;
 	(*head)->len++;
 }
@@ -69,4 +75,34 @@ void				llist_del(t_llist **head, t_llist_del_fn del)
 	}
 	free(*head);
 	*head = NULL;
+}
+
+t_llist_node		*llist_get_next(t_llist *head)
+{
+	t_llist_node *node;
+
+	if (head == NULL)
+		return (NULL);
+	node = head->start;
+	while (node)
+		if (node->is_available)
+			return (node);
+		else
+			node = node->next;
+	return (node);
+}
+
+t_llist_node		*llist_get_next_after(t_llist_node *start)
+{
+	t_llist_node *node;
+
+	if (start == NULL)
+		return (NULL);
+	node = start->next;
+	while (node)
+		if (node->is_available)
+			return (node);
+		else
+			node = node->next;
+	return (node);
 }
