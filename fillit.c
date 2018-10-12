@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 16:16:27 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/11 23:57:20 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/12 15:39:20 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,32 +85,37 @@ static void	remove(t_grid *grid, t_grid *piece, int x, int y)
 	grid->c--;
 }
 
-static int	fillit(t_grid *grid, t_llist_node *piece_lst)
+static int	fillit(t_grid *grid, t_llist *pieces)
 {
-	size_t	x;
-	size_t	y;
-	t_grid	*piece;
+	size_t			x;
+	size_t			y;
+	t_llist_node	*piece_lst;
+	t_grid			*piece;
 
-	if (piece_lst == NULL)
-		return (1);
-	piece = (t_grid*)piece_lst->data;
-	y = 0;
-	while (y < grid->size)
+	while ((piece_lst = llist_get_next(pieces)))
 	{
-		x = 0;
-		while (x < grid->size)
+		piece = (t_grid*)piece_lst->data;
+		piece_lst->checked = 1;
+		y = 0;
+		while (y < grid->size)
 		{
-			if (place(grid, piece, x, y))
+			x = 0;
+			while (x < grid->size)
 			{
-				if (fillit(grid, piece_lst->next))
-					return (1);
-				remove(grid, piece, x, y);
+				if (place(grid, piece, x, y))
+				{
+					piece_lst->available = 0;
+					if (fillit(grid, pieces))
+						return (1);
+					remove(grid, piece, x, y);
+					piece_lst->available = 1;
+				}
+				x++;
 			}
-			x++;
+			y++;
 		}
-		y++;
 	}
-	return (0);
+	return (piece_lst == NULL);
 }
 
 t_grid		*fill_smallest_grid(t_llist *pieces)
@@ -123,6 +128,7 @@ t_grid		*fill_smallest_grid(t_llist *pieces)
 	{
 		if (fillit(grid, pieces->start))
 			return (grid);
+		llist_uncheck(pieces);
 		grid_free(grid);
 	}
 	return (NULL);
