@@ -3,14 +3,14 @@ LIBFT = libft/libft.a
 
 SRC =\
 	pieces.c\
-	grid.c\
-	fillit.c\
 	main.c\
+	grid.c\
+	# fillit.c\
 
 OBJ = $(SRC:.c=.o)
 
 CC = gcc
-FLAGS = -Wall -Wextra -Werror -fsanitize=address
+FLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 INCLUDES = -I libft/includes
 
 all: $(NAME)
