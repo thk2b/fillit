@@ -6,11 +6,12 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 16:16:27 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/11 18:07:12 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/11 20:25:17 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
+#include "llist.h"
 
 static int	place(t_grid *grid, t_grid *piece, int x, int y)
 {
@@ -22,7 +23,7 @@ static void	remove(t_grid *grid, t_grid *piece, int x, int y)
 
 }
 
-static int	fillit(t_grid *grid, t_list *piece_lst)
+static int	fillit(t_grid *grid, t_llist_node *piece_lst)
 {
 	int x;
 	int y;
@@ -30,7 +31,7 @@ static int	fillit(t_grid *grid, t_list *piece_lst)
 
 	if (piece_lst == NULL)
 		return (1);
-	piece = (t_grid*)piece_lst->content;
+	piece = (t_grid*)piece_lst->data;
 	y = 0;
 	while (y < grid->size)
 	{
@@ -50,7 +51,7 @@ static int	fillit(t_grid *grid, t_list *piece_lst)
 	return (0);
 }
 
-t_grid		*fill_smallest_grid(t_list *pieces)
+t_grid		*fill_smallest_grid(t_llist *pieces)
 {
 	size_t	size;
 	t_grid	*grid;
@@ -58,7 +59,7 @@ t_grid		*fill_smallest_grid(t_list *pieces)
 	size = 1;
 	while ((grid = grid_new(size++)))
 	{
-		if (fillit(grid, pieces))
+		if (fillit(grid, pieces->start))
 			return (grid);
 		grid_free(grid);
 	}

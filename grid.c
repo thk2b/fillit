@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 16:33:20 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/11 18:21:20 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/11 20:40:14 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ void	grid_free(t_grid *grid)
 	i = 0;
 	while (i < grid->size)
 		free(grid->data[i++]);
+	free(grid->data);
 	free(grid);
 }

@@ -6,20 +6,20 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 16:17:38 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/11 19:08:40 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/11 20:21:46 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include "libft.h"
+#include "llist.h"
 #include "get_next_line.h"
 
-static int	read_piece(int fd, t_list **list)
+static int	read_piece(int fd, t_llist **list)
 {
 	size_t		i;
 	size_t		len;
 	char	*line;
-	t_list	*item;
 	t_grid	*piece;
 
 	i = 0;
@@ -37,24 +37,22 @@ static int	read_piece(int fd, t_list **list)
 	}
 	if (i != piece->size)
 		return (-1);
-	MALLOC_CHECK(item = ft_lstnew((void*)piece, sizeof(t_grid)));
-	ft_lstadd(list, item);
+	llist_push(list, (void*)piece);
 	return (1);
 }
 
-t_list		*read_pieces(int fd)
+int			read_pieces(int fd, t_llist **pieces)
 {
-	t_list	*head;
 	int		status;
 	char	*line;
 
-	while ((status = read_piece(fd, &head)))
+	while ((status = read_piece(fd, pieces)))
 	{
 		if (get_next_line(fd, &line) < 1)
 			break;
 		free(line);
 	}
 	if (status == -1) //TODO: free
-		return (NULL);
-	return (head);
+		return (-1);
+	return (1);
 }
