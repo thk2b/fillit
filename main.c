@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 16:02:44 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/11 20:26:48 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/11 21:21:23 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ void	free_piece(void *v_piece)
 
 int		main(int ac, char **av)
 {
-	t_llist *pieces;
-	// t_grid *grid;
-	int fd;
+	t_llist	*pieces;
+	t_grid	*grid;
+	int		fd;
 
 	pieces = NULL;
 	if (ac != 2)
@@ -46,10 +46,9 @@ int		main(int ac, char **av)
 		return (error());
 	if((read_pieces(fd, &pieces)) == -1)
 		return (error());
-	// MALLOC_CHECK(grid = fill_smallest_grid(pieces));
-	// write_grid(grid);
-	// close(fd);
+	MALLOC_CHECK(grid = fill_smallest_grid(pieces));
+	write_grid(grid);
+	close(fd);
 	llist_del(&pieces, free_piece);
-	while (1);
 	return (0);
 }
