@@ -2,15 +2,17 @@ NAME = fillit
 LIBFT = libft/libft.a
 
 SRC =\
+	standardize_piece.c\
 	pieces.c\
 	main.c\
 	grid.c\
 	llist.c\
-	# fillit.c\
+	fillit.c\
 
 OBJ = $(SRC:.c=.o)
 
 CC = gcc
+# FLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 FLAGS = -Wall -Wextra -Werror -g
 INCLUDES = -I libft/includes
 

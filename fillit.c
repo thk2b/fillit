@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 16:16:27 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/11 21:28:14 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/11 22:32:02 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ static int	is_valid(t_grid *grid, t_grid *piece, int x, int y)
 	size_t	px;
 	size_t	py;
 
-	write_grid(grid);
-	write_grid(piece);
 	py = 0;
 	while (py < piece->size)
 	{
@@ -28,9 +26,9 @@ static int	is_valid(t_grid *grid, t_grid *piece, int x, int y)
 		{
 			if (piece->data[py][px] == '#')
 			{
-				if (y + py > grid->size || x + px > grid->size)
+				if (y + py >= grid->size || x + px >= grid->size)
 					return (0);
-				if (grid->data[y + py][x + px] != 0)
+				if (grid->data[y + py][x + px] != '.')
 					return (0);
 			}
 			px++;
@@ -47,14 +45,13 @@ static int	place(t_grid *grid, t_grid *piece, int x, int y)
 
 	if (!is_valid(grid, piece, x, y))
 		return (0);
-	write_grid(grid);
 	py = 0;
 	while (py < piece->size)
 	{
 		px = 0;
 		while (px < piece->size)
 		{
-			if (piece->data[py][px] == '*')
+			if (piece->data[py][px] == '#')
 			{
 				grid->data[y + py][x + px] = grid->c;
 			}
@@ -79,7 +76,7 @@ static void	remove(t_grid *grid, t_grid *piece, int x, int y)
 		{
 			if (piece->data[py][px] == '*')
 			{
-				grid->data[y + py][x + px] = 0;
+				grid->data[y + py][x + px] = '.';
 			}
 			px++;
 		}

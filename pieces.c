@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 16:17:38 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/11 20:21:46 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/11 22:57:05 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ static int	read_piece(int fd, t_llist **list)
 		piece->data[i++] = line;
 	}
 	if (i != piece->size)
+		return (-1);
+	if (standardize_piece(piece) == -1)
 		return (-1);
 	llist_push(list, (void*)piece);
 	return (1);
