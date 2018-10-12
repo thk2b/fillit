@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 16:17:38 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/11 18:52:30 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/11 19:08:40 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ static int	read_piece(int fd, t_list **list)
 	while (i < piece->size)
 	{
 		if (get_next_line(fd, &line) != 1)
-			return (i == 0 ? 0 : -1);
+			return (-1);
 		len = ft_strlen(line);
 		if (len == 0)
-			return (i == 0 ? 0 : -1);
+			return (-1);
 		if (len != piece->size)
 			return (-1);
 		piece->data[i++] = line;
