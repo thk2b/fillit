@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 16:17:38 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/11 23:56:51 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/12 22:32:57 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,15 @@ int			read_pieces(int fd, t_llist **pieces)
 	int		status;
 	char	*line;
 
-	while ((status = read_piece(fd, pieces)))
+	while ((status = read_piece(fd, pieces)) == 1)
 	{
 		if (get_next_line(fd, &line) < 1)
 			break ;
 		free(line);
 	}
 	if (status == -1)
+		return (-1);
+	if ((*pieces)->len == 0 || (*pieces)->len >= 26)
 		return (-1);
 	return (1);
 }

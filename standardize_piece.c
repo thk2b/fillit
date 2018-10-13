@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 22:56:39 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/11 23:58:00 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/12 22:31:08 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ int				standardize_piece(t_grid *piece)
 	size_t	vertical_offset;
 	size_t	horizontal_offset;
 
+	if (validate_piece(piece) == 0)
+		return (-1);
 	vertical_offset = get_vertical_offset(piece);
 	horizontal_offset = get_horizontal_offset(piece);
 	while (vertical_offset && vertical_offset--)
