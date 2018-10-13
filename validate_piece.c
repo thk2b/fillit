@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 21:58:23 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/12 22:33:24 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/12 22:37:25 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,9 @@ int			validate_piece(t_grid *piece)
 		x = 0;
 		while (x < piece->size)
 		{
-			if (piece->data[y][x] == '#')
+			if (piece->data[y][x] == '#' && ++count)
 			{
-				count++;
-				if((cur_contacts = check_neighbors(piece, (int)x, (int)y)) < 1)
+				if ((cur_contacts = check_neighbors(piece, (int)x, (int)y)) < 1)
 					return (0);
 				contacts += cur_contacts;
 			}

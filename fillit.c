@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 16:16:27 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/12 21:44:59 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/12 22:39:11 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,13 @@ static int	is_valid(t_grid *grid, t_grid *piece, int x, int y)
 	return (1);
 }
 
-static int	place(t_grid *grid, t_grid *piece, int x, int y, int index)
+static int	place(t_grid *grid, t_llist_node *piece_lst, int x, int y)
 {
 	size_t	px;
 	size_t	py;
+	t_grid	*piece;
 
+	piece = (t_grid*)piece_lst->data;
 	if (!is_valid(grid, piece, x, y))
 		return (0);
 	py = 0;
@@ -53,7 +55,7 @@ static int	place(t_grid *grid, t_grid *piece, int x, int y, int index)
 		{
 			if (piece->data[py][px] == '#')
 			{
-				grid->data[y + py][x + px] = 'A' + index;
+				grid->data[y + py][x + px] = 'A' + piece_lst->index;
 			}
 			px++;
 		}
@@ -103,7 +105,7 @@ static int	fillit(t_grid *grid, t_llist *pieces)
 			x = 0;
 			while (x < grid->size)
 			{
-				if (place(grid, piece, x, y, piece_lst->index))
+				if (place(grid, piece_lst, x, y))
 				{
 					piece_lst->available = 0;
 					if (fillit(grid, pieces))
