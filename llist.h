@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 19:52:50 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/12 20:28:20 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/12 21:40:44 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,6 @@ typedef void	(*t_llist_del_fn)(void*);
 
 void			llist_push(t_llist **head, void *data);
 void			llist_del(t_llist **head, t_llist_del_fn del);
-t_llist_node	*llist_next(t_llist_node *start);
+t_llist_node	*llist_next(t_llist_node *start, int skip);
 
 #endif

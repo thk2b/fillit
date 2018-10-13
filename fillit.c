@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 16:16:27 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/12 20:36:13 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/12 21:43:57 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static void	remove(t_grid *grid, t_grid *piece, int x, int y)
 		px = 0;
 		while (px < piece->size)
 		{
-			if (piece->data[py][px] == '*')
+			if (piece->data[py][px] == '#')
 			{
 				grid->data[y + py][x + px] = '.';
 			}
@@ -93,7 +93,7 @@ static int	fillit(t_grid *grid, t_llist *pieces)
 
 	i = 0;
 	piece_lst = pieces->start;
-	while ((piece_lst = llist_next(piece_lst->next)))
+	while ((piece_lst = llist_next(piece_lst, i)))
 	{
 		i++;
 		piece = (t_grid*)piece_lst->data;
@@ -124,7 +124,7 @@ t_grid		*fill_smallest_grid(t_llist *pieces)
 	size_t	size;
 	t_grid	*grid;
 
-	size = 4; //TODO: reset to 1
+	size = 3;
 	while ((grid = grid_new(size++)))
 	{
 		if (fillit(grid, pieces))
