@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 15:55:19 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/11 23:55:59 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/12 20:29:37 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ typedef struct	s_grid
 {
 	size_t	size;
 	char	**data;
-	char	c;
 }				t_grid;
 
 t_grid			*grid_new(size_t size);

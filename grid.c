@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 16:33:20 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/11 23:55:37 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/12 20:29:46 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ t_grid	*grid_new(size_t size)
 
 	MALLOC_CHECK(grid = (t_grid*)malloc(sizeof(t_grid)));
 	grid->size = size;
-	grid->c = 'A';
 	MALLOC_CHECK(grid->data = (char**)malloc(sizeof(char*) * size));
 	y = 0;
 	while (y < size)
