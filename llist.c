@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 19:58:39 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/12 21:49:48 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/12 21:51:33 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void				llist_del(t_llist **head, t_llist_del_fn del)
 	*head = NULL;
 }
 
-t_llist_node *llist_next(t_llist_node *start, int skip)
+t_llist_node		*llist_next(t_llist_node *start, int skip)
 {
 	t_llist_node	*node;
 
