@@ -2,6 +2,7 @@ NAME = fillit
 LIBFT = libft/libft.a
 
 SRC =\
+	validate_piece.c\
 	standardize_piece.c\
 	pieces.c\
 	main.c\
@@ -12,8 +13,7 @@ SRC =\
 OBJ = $(SRC:.c=.o)
 
 CC = gcc
-# FLAGS = -Wall -Wextra -Werror -fsanitize=address -g
-FLAGS = -Wall -Wextra -Werror -g
+FLAGS = -Wall -Wextra -Werror
 INCLUDES = -I libft/includes
 
 all: $(NAME)
