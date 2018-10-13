@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 19:52:50 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/12 00:47:11 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/12 19:25:46 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef struct	s_llist_node
 	void				*data;
 	struct s_llist_node	*next;
 	char				is_available;
+	char				checked;
 	int					index;
 }				t_llist_node;
 
@@ -34,6 +35,8 @@ typedef void	(*t_llist_del_fn)(void*);
 
 void			llist_push(t_llist **head, void *data);
 void			llist_del(t_llist **head, t_llist_del_fn del);
+void			llist_uncheck(t_llist *head);
+int				llist_all_unavailable(t_llist *head);
 t_llist_node	*llist_get_next(t_llist *head);
 t_llist_node	*llist_get_next_after(t_llist_node *start);
 

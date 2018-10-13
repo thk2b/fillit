@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 19:58:39 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/12 00:46:40 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/12 19:25:53 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static t_llist_node	*llist_new_node(void *data)
 	n->data = data;
 	n->next = NULL;
 	n->is_available = 1;
+	n->checked = 0;
 	n->index = -1;
 	return (n);
 }
@@ -79,17 +80,7 @@ void				llist_del(t_llist **head, t_llist_del_fn del)
 
 t_llist_node		*llist_get_next(t_llist *head)
 {
-	t_llist_node *node;
-
-	if (head == NULL)
-		return (NULL);
-	node = head->start;
-	while (node)
-		if (node->is_available)
-			return (node);
-		else
-			node = node->next;
-	return (node);
+	return (llist_get_next_after(head->start));
 }
 
 t_llist_node		*llist_get_next_after(t_llist_node *start)
@@ -100,9 +91,33 @@ t_llist_node		*llist_get_next_after(t_llist_node *start)
 		return (NULL);
 	node = start->next;
 	while (node)
-		if (node->is_available)
+		if (node->is_available && !node->checked)
 			return (node);
 		else
 			node = node->next;
 	return (node);
+}
+int				llist_all_unavailable(t_llist *head)
+{
+	t_llist_node *n;
+
+	n = head->start;
+	while (n)
+		if (n->is_available)
+			return (0);
+		else
+			n = n->next;
+	return (1);
+}
+
+void			llist_uncheck(t_llist *head)
+{
+	t_llist_node *n;
+
+	n = head->start;
+	while (n)
+	{
+		n->checked = 0;
+		n = n->next;
+	}
 }

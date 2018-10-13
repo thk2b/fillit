@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 16:16:27 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/12 00:47:30 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/12 19:33:54 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ static int	place(t_grid *grid, t_grid *piece, int x, int y, int index)
 		}
 		py++;
 	}
-	grid->c++;
 	return (1);
 }
 
@@ -82,7 +81,6 @@ static void	remove(t_grid *grid, t_grid *piece, int x, int y)
 		}
 		py++;
 	}
-	grid->c--;
 }
 
 static int	fillit(t_grid *grid, t_llist_node *piece_lst, t_llist *pieces)
@@ -93,7 +91,9 @@ static int	fillit(t_grid *grid, t_llist_node *piece_lst, t_llist *pieces)
 	t_llist_node	*next;
 
 	piece = (t_grid*)piece_lst->data;
+	next = piece_lst;
 	y = 0;
+	piece_lst->checked = 1;
 	while (y < grid->size)
 	{
 		x = 0;
@@ -102,14 +102,16 @@ static int	fillit(t_grid *grid, t_llist_node *piece_lst, t_llist *pieces)
 			if (place(grid, piece, x, y, piece_lst->index))
 			{
 				piece_lst->is_available = 0;
-				while ((next = llist_get_next_after(piece_lst)) != NULL)
+				while ((next = llist_get_next(pieces)) != NULL)
 				{
 					if(fillit(grid, next, pieces))
 						return (1);
 				}
-				if (next == NULL)
+				if (llist_all_unavailable(pieces))
 					return (1);
 				remove(grid, piece, x, y);
+				piece_lst->is_available = 1;
+				llist_uncheck(pieces);
 			}
 			x++;
 		}
@@ -126,7 +128,7 @@ t_grid		*fill_smallest_grid(t_llist *pieces)
 	size = 1;
 	while ((grid = grid_new(size++)))
 	{
-		if (fillit(grid, llist_get_next(pieces), pieces))
+		if (fillit(grid, pieces->start, pieces))
 			return (grid);
 		grid_free(grid);
 	}
