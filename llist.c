@@ -6,7 +6,7 @@
 /*   By: tkobb <tkobb@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/11 19:58:39 by tkobb             #+#    #+#             */
-/*   Updated: 2018/10/12 21:51:33 by tkobb            ###   ########.fr       */
+/*   Updated: 2018/10/13 19:31:37 by tkobb            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static t_llist_node	*llist_new_node(void *data)
 	LLIST_MALLOC_CHECK(n = (t_llist_node*)malloc(sizeof(t_llist_node)));
 	n->data = data;
 	n->next = NULL;
-	n->available = 1;
 	n->index = -1;
 	return (n);
 }
@@ -75,18 +74,4 @@ void				llist_del(t_llist **head, t_llist_del_fn del)
 	}
 	free(*head);
 	*head = NULL;
-}
-
-t_llist_node		*llist_next(t_llist_node *start, int skip)
-{
-	t_llist_node	*node;
-
-	node = skip ? start->next : start;
-	while (node)
-	{
-		if (node->available)
-			return (node);
-		node = node->next;
-	}
-	return (node);
 }
